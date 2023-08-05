@@ -1,0 +1,65 @@
+Customizing your own Terminal
+
+Refer to the Corey Schafer video: .bash_profile and .bashrc files
+
+Priority 
+1. Git Prompts 
+2. Changing Path Variables
+3. Aliases
+
+Example 1: customizing the prompt
+
+Write PS1="Prompt-1"
+
+this should change the prompt.
+---------------------------------------
+
+bash_profile is used for logging  shells
+- I believe this for remote desktop session and such
+bashrc file is used for non-logging shells
+- Regular non sudo permission
+
+---------------------------------------
+
+Example 2: Special Characters
+--------------------------------------
+\h- the hostname ie: System-Product-Name
+\n- newline
+\s- the name of the shell
+\t- the current time in 24-hour format
+\u- the username of the current user
+\w- the current working directory 
+\W- The basename of the current working directory 
+
+Example 3: Tput and making prompt colorful
+--------------------------------------
+PS1="$(tput setaf 166)\u@\h\W -> $ (tput sgr0)";
+export PS1;
+
+Example 3.1: Escaping commands \[\]
+Use the brackets to escape the commands
+
+orange=$(tput setaf 166);
+bold=$(tput bold);
+
+PS1="\[${bold}\]\n"
+PS1+="\[${prange}\]\u\:$ \[$(tput srg0\)]" #username
+
+Example 3.2: 
+This is a common thing in some bash files 
+but sequences such as 
+\e[32m] or \x1b[1;31m] refers to Ansi escape codes 
+
+Shell \e 
+ASCII Hex \0x1B
+ASCII Oct \033
+
+Here is how you can understand this Ugly Bastard
+\x1b[31;4m
+
+\x1b[3 <-- refers to the Escape Character in Hex ASCII
+\31 <-- refers to the CSI 
+\1;4m <-- colors 
+\m_ <-- Finishing symbol 
+
+yes this is literally some weird ASCII Escape Character
