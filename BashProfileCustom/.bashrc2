@@ -1,0 +1,14 @@
+# Author: Rezvee Rahman
+# This is a custom bashrc profile created for my own tailored use.
+# Super Cursed btw.
+
+#For Git utilities SHOUTOUT TO THIS LEGEND: Chi Thuc Nguyen
+#Link: https://thucnc.medium.com/how-to-show-current-git-branch-with-colors-in-bash-prompt-380d05a24745
+par_git_bar() {
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+};
+
+PS1="\[$(tput setaf 197)\]\t:\[$(tput setaf 220)\]\w\n";
+PS1+="\[$(tput setaf 86)\]\s:\h-\[$(tput setaf 27)\]\u\[$(par_git_bar)\]:"
+PS1+="$ \[$(tput sgr0)\]";
+export PS1;
